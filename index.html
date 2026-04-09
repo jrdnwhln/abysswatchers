@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A local-first signal hub for crypto markets and fresh scientific research."
+    />
+    <meta name="theme-color" content="#08111f" />
+    <title>Abyss Watchers | Signal Mesh</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="background-grid" aria-hidden="true"></div>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Decentralized Signal Hub</p>
+          <h1>Track the chain. Read the lab. Share the signal.</h1>
+          <p class="hero-text">
+            Abyss Watchers blends live crypto market movement with current
+            scientific publishing so your community can spot momentum across
+            networks, research labs, and emerging ideas.
+          </p>
+          <div class="hero-actions">
+            <button id="refreshAll" class="primary-button" type="button">
+              Refresh Mesh
+            </button>
+            <button id="sharePack" class="ghost-button" type="button">
+              Export Signal Pack
+            </button>
+            <label class="ghost-button import-button">
+              Import Signal Pack
+              <input id="importPack" type="file" accept="application/json" hidden />
+            </label>
+          </div>
+          <p id="statusMessage" class="status-message" aria-live="polite">
+            Booting local mesh...
+          </p>
+        </div>
+        <aside class="hero-panel glass-card">
+          <p class="panel-label">Node Profile</p>
+          <div class="node-profile">
+            <div>
+              <p class="metric-label">Science topic</p>
+              <p id="activeTopicLabel" class="metric-value">AI research</p>
+            </div>
+            <div>
+              <p class="metric-label">Tracked assets</p>
+              <p id="watchlistCount" class="metric-value">0</p>
+            </div>
+            <div>
+              <p class="metric-label">Cache mode</p>
+              <p class="metric-value">Local-first</p>
+            </div>
+          </div>
+          <div class="node-notes">
+            <label for="nodeNotes">Why this node matters</label>
+            <textarea
+              id="nodeNotes"
+              rows="5"
+              placeholder="Leave context for your community, thesis notes, or trade ideas..."
+            ></textarea>
+          </div>
+        </aside>
+      </header>
+
+      <main class="dashboard">
+        <section class="control-strip glass-card">
+          <div class="control-group">
+            <label for="scienceQuery">Research query</label>
+            <div class="search-row">
+              <input
+                id="scienceQuery"
+                type="search"
+                placeholder="Search quantum networks, biotech, climate tech..."
+              />
+              <button id="runResearchSearch" type="button">Scan Papers</button>
+            </div>
+          </div>
+          <div class="control-group">
+            <p>Topic channels</p>
+            <div id="topicChips" class="chip-row" role="tablist" aria-label="Science topics"></div>
+          </div>
+          <div class="control-group">
+            <label for="assetInput">Watchlist asset</label>
+            <div class="search-row">
+              <input
+                id="assetInput"
+                type="text"
+                placeholder="bitcoin, ethereum, solana..."
+              />
+              <button id="addAsset" type="button">Add Asset</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="overview-grid">
+          <article class="glass-card overview-card">
+            <p class="panel-label">Market Cap</p>
+            <h2 id="globalMarketCap">$0</h2>
+            <p id="marketCapChange" class="market-sentiment neutral">Waiting for feed...</p>
+          </article>
+          <article class="glass-card overview-card">
+            <p class="panel-label">24h Volume</p>
+            <h2 id="globalVolume">$0</h2>
+            <p class="subtle-copy">Across the tracked crypto universe.</p>
+          </article>
+          <article class="glass-card overview-card">
+            <p class="panel-label">BTC Dominance</p>
+            <h2 id="btcDominance">0%</h2>
+            <p class="subtle-copy">A quick check on risk appetite.</p>
+          </article>
+          <article class="glass-card overview-card">
+            <p class="panel-label">Research Hits</p>
+            <h2 id="paperCount">0</h2>
+            <p class="subtle-copy">Recent papers matching your topic signal.</p>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article class="glass-card">
+            <div class="section-heading">
+              <div>
+                <p class="panel-label">Crypto Pulse</p>
+                <h2>Market board</h2>
+              </div>
+              <p class="subtle-copy">Live from public market feeds.</p>
+            </div>
+            <div class="table-shell">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Asset</th>
+                    <th>Price</th>
+                    <th>24h</th>
+                    <th>Market cap</th>
+                    <th>Volume</th>
+                  </tr>
+                </thead>
+                <tbody id="marketTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="glass-card">
+            <div class="section-heading">
+              <div>
+                <p class="panel-label">Research Radar</p>
+                <h2>Fresh publications</h2>
+              </div>
+              <p class="subtle-copy">Sorted toward the newest signal we can find.</p>
+            </div>
+            <div id="paperFeed" class="paper-feed"></div>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article class="glass-card">
+            <div class="section-heading">
+              <div>
+                <p class="panel-label">Watchlist Mesh</p>
+                <h2>Tracked assets</h2>
+              </div>
+              <p class="subtle-copy">
+                Saved locally on this device so your node keeps context.
+              </p>
+            </div>
+            <div id="watchlist" class="watchlist"></div>
+          </article>
+
+          <article class="glass-card">
+            <div class="section-heading">
+              <div>
+                <p class="panel-label">Signal Summary</p>
+                <h2>Cross-domain briefing</h2>
+              </div>
+              <p class="subtle-copy">A quick narrative stitched from market and research movement.</p>
+            </div>
+            <div id="summaryPanel" class="summary-panel"></div>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article class="glass-card radio-card">
+            <div class="section-heading">
+              <div>
+                <p class="panel-label">Radio Node</p>
+                <h2>Optional listening mode</h2>
+              </div>
+              <p class="subtle-copy">Nothing plays unless the user explicitly opts in.</p>
+            </div>
+
+            <div id="radioConsentPanel" class="radio-consent">
+              <p class="radio-copy">
+                Turn on the radio layer if you want a music backdrop while
+                browsing the market and research feeds.
+              </p>
+              <button id="enableRadio" class="primary-button" type="button">
+                Enable Radio
+              </button>
+            </div>
+
+            <div id="radioControls" class="radio-controls hidden">
+              <div class="control-group">
+                <p>Quick artist fills</p>
+                <div class="chip-row">
+                  <button class="topic-chip" type="button" data-radio-fill="Lil Poppa mix">
+                    Lil Poppa
+                  </button>
+                  <button class="topic-chip" type="button" data-radio-fill="Luhh Dyl mix">
+                    Luhh Dyl
+                  </button>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label for="radioInput">YouTube link or ID</label>
+                <div class="search-row">
+                  <input
+                    id="radioInput"
+                    type="text"
+                    placeholder="Paste a YouTube video or playlist link to start the station"
+                  />
+                  <button id="loadRadio" type="button">Load Station</button>
+                </div>
+              </div>
+
+              <div class="radio-actions">
+                <button id="openYoutubeSearch" class="ghost-button" type="button">
+                  Search On YouTube
+                </button>
+                <button id="stopRadio" class="ghost-button" type="button">
+                  Stop Radio
+                </button>
+              </div>
+
+              <p id="radioStatus" class="status-message">
+                Pick a YouTube link or use a quick fill, then load the station.
+              </p>
+
+              <div id="radioPlayerShell" class="radio-player-shell hidden">
+                <iframe
+                  id="radioPlayer"
+                  class="radio-player"
+                  title="Abyss Watchers radio"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                ></iframe>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass-card">
+            <div class="section-heading">
+              <div>
+                <p class="panel-label">Playback Notes</p>
+                <h2>How the radio behaves</h2>
+              </div>
+              <p class="subtle-copy">Built to respect user choice and browser autoplay rules.</p>
+            </div>
+            <div class="summary-panel">
+              <article class="summary-point">
+                <h3>Consent first</h3>
+                <p>The radio panel stays off until someone clicks Enable Radio.</p>
+              </article>
+              <article class="summary-point">
+                <h3>YouTube powered</h3>
+                <p>Load a public YouTube video or playlist link and the embed will act like a lightweight station.</p>
+              </article>
+              <article class="summary-point">
+                <h3>Autoplay caveat</h3>
+                <p>Because browsers can still block audible autoplay, the player may occasionally need one extra press inside the embed.</p>
+              </article>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <template id="topicChipTemplate">
+      <button class="topic-chip" type="button" role="tab" aria-selected="false"></button>
+    </template>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
