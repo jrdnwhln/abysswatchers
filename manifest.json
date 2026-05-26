@@ -8,8 +8,8 @@
   "theme_color": "#08111f",
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='56' fill='%2308111f'/%3E%3Cpath d='M58 190L128 50l70 140' fill='none' stroke='%234cffb2' stroke-width='18' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='128' cy='138' r='18' fill='%2358d9ff'/%3E%3C/svg%3E",
-      "sizes": "256x256",
+      "src": "./abyss-watchers-logo.svg",
+      "sizes": "any",
       "type": "image/svg+xml"
     }
   ]
