@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Abyss Watchers logo</title>
+  <desc id="desc">A neon triangular watchtower mark over a deep blue signal grid.</desc>
+  <defs>
+    <radialGradient id="core" cx="50%" cy="44%" r="58%">
+      <stop offset="0%" stop-color="#143156"/>
+      <stop offset="58%" stop-color="#08111f"/>
+      <stop offset="100%" stop-color="#040711"/>
+    </radialGradient>
+    <linearGradient id="signal" x1="96" y1="416" x2="416" y2="96" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4cffb2"/>
+      <stop offset="48%" stop-color="#58d9ff"/>
+      <stop offset="100%" stop-color="#ffb84d"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#core)"/>
+  <path d="M74 376h364M102 312h308M134 248h244M170 184h172" stroke="#ffffff" stroke-opacity=".08" stroke-width="12" stroke-linecap="round"/>
+  <path d="M96 414 256 86l160 328" fill="none" stroke="url(#signal)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <path d="M178 362h156L256 204z" fill="#08111f" fill-opacity=".92" stroke="#4cffb2" stroke-opacity=".4" stroke-width="10" stroke-linejoin="round"/>
+  <circle cx="256" cy="302" r="34" fill="#58d9ff" filter="url(#glow)"/>
+  <circle cx="256" cy="302" r="12" fill="#f4f6fb"/>
+</svg>
