@@ -1,5 +1,12 @@
-const CACHE_NAME = "abyss-watchers-shell-v1";
-const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./manifest.json"];
+const CACHE_NAME = "abyss-watchers-shell-v2";
+const APP_SHELL = [
+  "./",
+  "./index.html",
+  "./styles.css",
+  "./app.js",
+  "./manifest.json",
+  "./abyss-watchers-logo.svg"
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
