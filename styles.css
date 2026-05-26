@@ -64,6 +64,25 @@ button {
   padding: 28px 0 48px;
 }
 
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.brand-mark img {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+}
+
 .hero,
 .content-grid,
 .overview-grid {
